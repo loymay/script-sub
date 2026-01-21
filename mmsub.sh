@@ -37,6 +37,9 @@ install_shortcut() {
 bash $SCRIPT_PATH "\$@"
 EOF
     chmod +x "$SHORTCUT_PATH"
+    echo -e "${SUCCESS} 检测到首次运行，已自动添加快捷指令：${CYAN}mmsub${NC}"
+    echo -e "${INFO} 下次只需在终端输入 ${GREEN}mmsub${NC} 即可快速呼出本菜单！"
+    sleep 2
 }
 
 # 卸载功能
@@ -158,9 +161,8 @@ menu_personal() {
 # 执行入口
 if [[ "$1" == "install" ]]; then
     install_shortcut
-    echo -e "${SUCCESS} 快捷指令 mmsub 已安装。以后直接输入 mmsub 即可运行本脚本。"
 else
     # 自动尝试安装快捷方式（如果不存在的话）
-    [[ ! -f "$SHORTCUT_PATH" ]] && install_shortcut >/dev/null 2>&1
+    [[ ! -f "$SHORTCUT_PATH" ]] && install_shortcut
     main_menu
 fi
