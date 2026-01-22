@@ -106,7 +106,8 @@ menu_proxy() {
     echo -e " ${BLUE}【代理脚本】${NC}"
     echo -e "  [1] 戏子singbo-lite    [2] 戏子mtp"
     echo -e "  [3] 梭哈脚本 (Suoha)   [4] ArgoX (fscarmen)"
-    echo -e "  [5] Sing-box (fscarmen [6] Sing-box (eooce)"
+    echo -e "  [5] Sing-box (fscarmen) [6] Sing-box (eooce)"
+    echo -e "  [7] vless极简[xray]    [8] hysteria2极简[手搓]"
     echo ""
     echo -e "  [0] 返回主菜单"
     echo ""
@@ -118,8 +119,33 @@ menu_proxy() {
         4) bash <(wget -qO- https://raw.githubusercontent.com/fscarmen/argox/main/argox.sh) ;;
         5) bash <(wget -qO- https://raw.githubusercontent.com/fscarmen/sing-box/main/sing-box.sh) ;;
         6) bash <(curl -Ls https://raw.githubusercontent.com/eooce/sing-box/main/sing-box.sh) ;;
+        7) bash <(curl -L https://raw.githubusercontent.com/yahuisme/xray-vless-reality/main/install.sh) ;;
+        8) menu_hy2 ;;
         0) main_menu ;;
         *) echo -e "${ERROR} 无效选项"; sleep 1; menu_proxy ;;
+    esac
+}
+
+# --- 子菜单: Hysteria2 选择 (针对 seagullz4 脚本) ---
+menu_hy2() {
+    draw_header
+    echo -e " ${BLUE}【hysteria2极简[手搓]】${NC}"
+    echo -e "  [1] Python 版本 (推荐, 持续维护)"
+    echo -e "  [2] Shell 版本 (不再维护, 极简)"
+    echo ""
+    echo -e "  [0] 返回上级菜单"
+    echo ""
+    read -p " 请选择版本 [1/2]: " hy_opt
+    case "$hy_opt" in
+        1) 
+            wget -O phy2.sh https://raw.githubusercontent.com/seagullz4/hysteria2/main/phy2.sh && chmod +x phy2.sh && bash phy2.sh
+            wget -O hy2.py https://raw.githubusercontent.com/seagullz4/hysteria2/main/hysteria2.py && chmod +x hy2.py && python3 hy2.py
+            ;;
+        2)
+            wget -O install.sh https://raw.githubusercontent.com/seagullz4/hysteria2/main/install.sh && chmod +x install.sh && bash install.sh
+            ;;
+        0) menu_proxy ;;
+        *) echo -e "${ERROR} 无效选项"; sleep 1; menu_hy2 ;;
     esac
 }
 
